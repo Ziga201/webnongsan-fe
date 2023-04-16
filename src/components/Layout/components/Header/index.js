@@ -1,60 +1,80 @@
-import { useState, useEffect } from 'react';
 import style from './Header.module.scss';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css'; // optional
-import images from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+import logo from '~/assets/images/logo.svg';
+import { Link } from 'react-router-dom';
+import { faCartShopping, faHeart, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import AccountItem from '~/components/AccountItem';
 
 const cx = classNames.bind(style);
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    });
     return (
-        <header className={cx('wrapper')}>
-            <div className={cx('inner')}>
-                <div className={cx('logo')}>
-                    <img src={images.logo} alt="tiktok" />
+        <>
+            <div className={cx('ship')}>
+                <div className={cx('wrapper')}>
+                    <div className={cx('ship-text')}>Chuyển phát nhanh quốc tế MIỄN PHÍ + trả hàng DỄ DÀNG</div>
+                    <div className={cx('')}></div>
                 </div>
-
-                <Tippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Account</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search account and video" />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </Tippy>
-                <div className={cx('actions')}></div>
             </div>
-        </header>
+            <header className={cx('header')}>
+                <div className={cx('wrapper')}>
+                    <div className={cx('logo')}>
+                        <Link to="/">
+                            <img src={logo} alt="logo" />
+                        </Link>
+                    </div>
+                    <div className={cx('menu')}>
+                        <Link className={cx('menu-link', 'active')} to="/">
+                            <div className={cx('title')}>Trang chủ</div>
+                        </Link>
+
+                        <Link className={cx('menu-link')} to="/">
+                            <div className={cx('title')}>Cửa hàng</div>
+                        </Link>
+                        <Link className={cx('menu-link')} to="/">
+                            <div className={cx('title')}>Dịch vụ</div>
+                        </Link>
+                        <Link className={cx('menu-link')} to="/">
+                            <div className={cx('title')}>Tin tức</div>
+                        </Link>
+                        <Link className={cx('menu-link')} to="/">
+                            <div className={cx('title')}>Liên hệ</div>
+                        </Link>
+                    </div>
+                    <div className={cx('action')}>
+                        <Link to="/">
+                            <div className={cx('search')}>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </div>
+                        </Link>
+                        <Link to="/">
+                            <div className={cx('user')}>
+                                <FontAwesomeIcon icon={faUser} />
+                            </div>
+                        </Link>
+                        <Link className={cx()} to="/">
+                            <div className={cx('wrap')}>
+                                <div className={cx('heart')}>
+                                    <FontAwesomeIcon icon={faHeart} />
+                                </div>
+                                <span className={cx('count')}>1</span>
+                            </div>
+                        </Link>
+                        <Link to="/" className={cx('link-cart')}>
+                            <div className={cx('wrap')}>
+                                <div className={cx('cart')}>
+                                    <FontAwesomeIcon icon={faCartShopping} />
+                                </div>
+                                <span className={cx('count')}>0</span>
+                            </div>
+                            <span className={cx('total')}>0 VND</span>
+                        </Link>
+                    </div>
+                </div>
+            </header>
+        </>
     );
 }
 
