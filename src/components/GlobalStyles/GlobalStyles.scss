@@ -26,8 +26,8 @@ body {
 button,
 input,
 [tabindex] {
-    outline: none;
-    border: none;
+    // outline: none;
+    // border: none;
 }
 
 a[href] {
@@ -38,8 +38,6 @@ a[href] {
 .wrapper {
     width: 1410px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
     height: 100%;
 }
 

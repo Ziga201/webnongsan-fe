@@ -30,16 +30,16 @@ function Header() {
                             <div className={cx('title')}>Trang chủ</div>
                         </Link>
 
-                        <Link className={cx('menu-link')} to="/">
-                            <div className={cx('title')}>Cửa hàng</div>
+                        <Link className={cx('menu-link')} to="/product">
+                            <div className={cx('title')}>Sản phẩm</div>
                         </Link>
                         <Link className={cx('menu-link')} to="/">
-                            <div className={cx('title')}>Dịch vụ</div>
+                            <div className={cx('title')}>Đội ngũ</div>
                         </Link>
-                        <Link className={cx('menu-link')} to="/">
+                        <Link className={cx('menu-link')} to="/blog">
                             <div className={cx('title')}>Tin tức</div>
                         </Link>
-                        <Link className={cx('menu-link')} to="/">
+                        <Link className={cx('menu-link')} to="/contact">
                             <div className={cx('title')}>Liên hệ</div>
                         </Link>
                     </div>

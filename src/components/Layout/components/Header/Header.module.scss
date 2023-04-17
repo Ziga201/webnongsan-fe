@@ -6,7 +6,9 @@
 }
 
 .ship-text {
-    align-self: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .header {
@@ -27,6 +29,10 @@
     width: 130px;
 }
 
+.header div {
+    display: flex;
+}
+
 .menu {
     display: flex;
     width: 55%;
@@ -39,9 +45,9 @@
     }
 }
 
-.menu-link.active {
-    color: var(--light-green);
-}
+// .menu-link.active {
+//     color: var(--light-green);
+// }
 
 .title {
     font-weight: 700;

@@ -7,9 +7,13 @@
     padding: 45px 0;
 }
 
+.line1-border {
+    border-bottom: 1px solid #e1e1e1;
+}
+
 .contact {
     display: flex;
-    justify-content: start;
+    justify-content: left;
     align-items: center;
 }
 
@@ -58,7 +62,8 @@
 }
 
 .line2 {
-    padding: 65px 50px;
+    padding: 65px 0px;
+    border-top: 1px #e1e1e163 solid;
 }
 
 .heading {

@@ -9,7 +9,7 @@ import brand4 from '~/assets/images/brand4.svg';
 import brand5 from '~/assets/images/brand5.svg';
 import brand6 from '~/assets/images/brand6.svg';
 import { Link } from 'react-router-dom';
-import { faArrowRight, faCircleArrowRight, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { Tab, TabList, TabPanel } from 'react-tabs';
 
@@ -20,7 +20,7 @@ function Home() {
     return (
         <>
             <div className={cx('banner')}>
-                <div className={cx('')}>
+                <div className={cx('wrapper')}>
                     <div className={cx('hug-banner')}>
                         <div className={cx('logo-banner')}>
                             <img
@@ -85,7 +85,7 @@ function Home() {
 
             <div className={cx('product')}>
                 <div className={cx('text-editor')}>Discover</div>
-                <div className={cx('heading')}>Our Products</div>
+                <div className={cx('heading')}>Sản phẩm của chúng tôi</div>
 
                 <div className={cx('tab')}>
                     <div className={cx('tab-link', 'active')}>Tất cả</div>
@@ -245,9 +245,9 @@ function Home() {
             <div className={cx('reason')}>
                 <div className={cx('reason-bg')}>
                     <div className={cx('text-editor')}>Discover</div>
-                    <div className={cx('heading')}>Our Products</div>
+                    <div className={cx('heading')}>Sản phẩm của chúng tôi</div>
 
-                    <div className={cx('wrapper')}>
+                    <div className={cx('wrapper', 'row')}>
                         <div className="col-md-6"></div>
                         <div className={cx('reason-list', 'col-md-6')}>
                             <div className={cx('reason-item')}>
