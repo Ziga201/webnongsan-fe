@@ -10,7 +10,9 @@ function DefaultLayout({ children }) {
     return (
         <div>
             <Header />
-            <div className={cx('content')}>{children}</div>
+            <div className={cx('content')}>
+                <div style={{ marginTop: '150px' }}>{children}</div>
+            </div>
             <Footer />
         </div>
     );
