@@ -1,0 +1,85 @@
+.banner {
+    background: url('https://demo2.pavothemes.com/freshio/wp-content/uploads/2020/08/breadcrumb_woo.jpg');
+    padding: 96px 0;
+}
+
+.banner div {
+    // padding: 0 20px;
+}
+
+.heading {
+    font-size: 50px;
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
+.path {
+    color: #999;
+}
+
+.content {
+    padding: 70px 0;
+}
+
+.text-editor {
+    font-family: 'Kaushan Script', sans-serif;
+    font-size: 24px;
+    color: var(--light-green);
+    text-align: center;
+}
+
+.search {
+    text-align: right;
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 220px;
+    height: 30px;
+    padding: 16px 12px;
+    border-radius: 50px;
+    outline: none;
+    border: 1px solid #333;
+    width: 250px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+}
+
+.product-block {
+    text-align: center;
+}
+
+.product-img img {
+    width: 250px;
+    height: 230px;
+}
+
+.product-name {
+}
+
+.product-price {
+    font-size: 16px;
+    color: var(--light-green);
+}
+
+.product-add {
+    font-weight: 600;
+    border: none;
+    background: none;
+    &:hover {
+        transition: all 0.3 ease-in;
+        color: var(--dark-green);
+        transform: scale(1.1);
+    }
+}
+
+.add-icon {
+    margin-left: 5px;
+}
