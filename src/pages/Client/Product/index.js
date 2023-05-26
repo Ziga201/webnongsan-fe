@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
-import ProductDetail from '../ProductDetail';
+// import ProductDetail from '../ProductDetail';
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +23,8 @@ function Product() {
 
     useEffect(() => {
         fetchPosts();
-    }, [posts]);
+    }, []);
+    console.log(posts);
 
     // Add to cart
     const [cartItems, setCartItems] = useState([]);
@@ -34,7 +35,7 @@ function Product() {
         // const newCartItems = [...cartItems, item];
         // setCartItems(newCartItems);
         // localStorage.setItem('cartItems', JSON.stringify(newCartItems));
-        const data = JSON.parse(localStorage.getItem('cartItems'));
+        // const data = JSON.parse(localStorage.getItem('cartItems'));
         const product = {
             id: item._id,
             name: item.name,
@@ -61,6 +62,13 @@ function Product() {
     // Search item
     const [search, setSearch] = useState('');
     console.log(search);
+
+    // Chuyen huong product detail
+
+    const handleClick = (productId) => {
+        // <Navigate to={`/product/${productId}`} />;
+        window.location.href = `/product/${productId}`;
+    };
 
     return (
         <>
@@ -90,7 +98,7 @@ function Product() {
                         />
                         <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
                     </div>
-                    {posts.data != undefined && posts.data.data.length > 0 && (
+                    {posts.data !== undefined && posts.data.data.length > 0 && (
                         <div className={cx('row')}>
                             {posts.data.data
                                 .filter((post) => {
@@ -99,8 +107,8 @@ function Product() {
                                         : post.name.toLowerCase().includes(search);
                                 })
                                 .map((post) => (
-                                    <div key={post.id} className={cx('product-block', 'col-md-3')}>
-                                        <Link to={`/product-detail/${post._id}`}>
+                                    <div key={post._id} className={cx('product-block', 'col-md-3')}>
+                                        <div onClick={() => handleClick(post._id)}>
                                             <div className={cx('product-img')}>
                                                 <img
                                                     src={'http://localhost:8000/api/postImages/' + post.image}
@@ -108,7 +116,7 @@ function Product() {
                                                 />
                                             </div>
                                             <div className={cx('product-name')}>{post.name}</div>
-                                        </Link>
+                                        </div>
 
                                         <div className={cx('product-price')}>
                                             {parseInt(post.price).toLocaleString('vi-VN')}

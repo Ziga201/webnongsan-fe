@@ -145,7 +145,7 @@ function Home() {
                 {posts.data !== undefined && posts.data.data.length > 0 && (
                     <div className={cx('row', 'wrapper')}>
                         {posts.data.data.map((post, index) => (
-                            <div className={cx('product-block', 'col-md-2dot4')}>
+                            <div key={post._id} className={cx('product-block', 'col-md-2dot4')}>
                                 <div className={cx('product-img')}>
                                     <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
                                 </div>

@@ -58,20 +58,20 @@ function Header() {
                         </Link>
                     </div>
                     <div className={cx('menu')}>
-                        <NavLink exact activeClassName="active" className={cx('menu-link')} to="/">
+                        <NavLink exact activeclassname="active" className={cx('menu-link')} to="/">
                             <div className={cx('title')}>Trang chủ</div>
                         </NavLink>
 
-                        <NavLink activeClassName="active" className={cx('menu-link')} to="/product">
+                        <NavLink activeclassname="active" className={cx('menu-link')} to="/product">
                             <div className={cx('title')}>Sản phẩm</div>
                         </NavLink>
-                        <NavLink activeClassName="active" className={cx('menu-link')} to="/staff">
+                        <NavLink activeclassname="active" className={cx('menu-link')} to="/staff">
                             <div className={cx('title')}>Đội ngũ</div>
                         </NavLink>
-                        <NavLink activeClassName="active" className={cx('menu-link')} to="/blog">
+                        <NavLink activeclassname="active" className={cx('menu-link')} to="/blog">
                             <div className={cx('title')}>Tin tức</div>
                         </NavLink>
-                        <NavLink activeClassName="active" className={cx('menu-link')} to="/contact">
+                        <NavLink activeclassname="active" className={cx('menu-link')} to="/contact">
                             <div className={cx('title')}>Liên hệ</div>
                         </NavLink>
                     </div>

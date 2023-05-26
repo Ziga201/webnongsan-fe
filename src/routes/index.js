@@ -27,7 +27,7 @@ const publicRoutes = [
     { path: '/contact', component: Contact },
     { path: '/blog', component: Blog },
     { path: '/product', component: Product },
-    { path: '/product-detail/:id', component: ProductDetail },
+    { path: '/product/:id', component: ProductDetail },
     { path: '/team', component: Team },
     { path: '/cart', component: Cart },
     { path: '/login', component: Login },
