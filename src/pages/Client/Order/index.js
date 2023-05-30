@@ -19,15 +19,15 @@ function Order() {
 
     useEffect(() => {
         fetchCheckouts();
-    }, [checkouts]);
+    }, []);
 
     const deleteCheckout = async (id, e) => {
-        var response = await checkoutService.deleteCheckout(id);
         const confirm = window.confirm('Bạn có muốn huỷ đơn hàng không');
         if (confirm) {
+            var response = await checkoutService.deleteCheckout(id);
             if (response.data.success === true) {
                 alert('Huỷ đơn hàng thành công');
-                document.getElementById(id).parentElement.remove();
+                document.getElementById(id).parentElement.parentElement.remove();
             } else {
                 alert(response.data.msg);
             }
@@ -54,6 +54,7 @@ function Order() {
                                     <th>Địa chỉ</th>
                                     <th>Tổng</th>
                                     <th>Ngày đặt hàng</th>
+                                    <th>Tình trạng</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,7 @@ function Order() {
                                         <td>{checkout.address}</td>
                                         <td>{parseInt(checkout.total).toLocaleString('vi-VN')} VND</td>
                                         <td>{checkout.orderdate}</td>
+                                        <td>{checkout.confirm}</td>
 
                                         <td>
                                             <button

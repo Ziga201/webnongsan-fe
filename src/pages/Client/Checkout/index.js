@@ -1,3 +1,4 @@
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import style from './Checkout.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
@@ -14,12 +15,15 @@ function Checkout() {
 
     const totalPrice = cartItems.reduce((acc, item) => acc + Number(item.price) * item.quantity, 0);
 
+    // const totalUSD = parseInt(totalPrice / 23000);
+
     // ADD
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [message, setMessage] = useState('');
+    const [confirm, setConfirm] = useState('Thanh toán khi nhận hàng');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -39,13 +43,13 @@ function Checkout() {
         const year = today.getFullYear();
 
         const orderdate = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
-
         formData.append('name', name);
         formData.append('phone', phone);
         formData.append('address', address);
         formData.append('total', total);
         formData.append('product', product);
         formData.append('orderdate', orderdate);
+        formData.append('confirm', confirm);
         // formData.append('cart', cart);
 
         const response = await checkoutService.create(formData);
@@ -60,10 +64,17 @@ function Checkout() {
             setMessage('');
         }, 2000);
 
-        // localStorage.removeItem('cartItems');
+        localStorage.removeItem('cartItems');
         event.target.reset();
 
         // initModal();
+    };
+
+    const handlePaypal = () => {
+        setTimeout(() => {
+            const button = document.getElementById('submit');
+            button.click();
+        }, 500);
     };
 
     return (
@@ -76,7 +87,7 @@ function Checkout() {
                             <img
                                 style={{ width: '100px' }}
                                 src={'http://localhost:8000/api/postImages/' + item.image}
-                                alt="Product Image"
+                                alt="Product"
                             />
                             <div className={cx('details')}>
                                 <h2 className={cx('name')}>Tên sản phẩm: {item.name}</h2>
@@ -127,7 +138,64 @@ function Checkout() {
                         required
                     />
 
-                    <input className={cx('input-btn')} type="submit" value="Đặt hàng" />
+                    <div className={cx('row checkout')}>
+                        <div className={cx('col-md-4')}>
+                            <p>{confirm}</p>
+                        </div>
+                        <div className={cx('col-md-4')}>
+                            <PayPalScriptProvider
+                                options={{
+                                    'client-id':
+                                        'AY3o2DhF061U3MnsiFc0V9Q_RjXM-gkS8Y3VQWuGRlVzBd_7AEL7mGlM_WzNoSGxPQ3az2dBa-P1Feco',
+                                }}
+                            >
+                                <PayPalButtons
+                                    type="submit"
+                                    // onClick={() => handleSubmit()}
+                                    style={{
+                                        layout: 'horizontal',
+                                    }}
+                                    createOrder={(data, actions) => {
+                                        const totalPrice = cartItems.reduce(
+                                            (acc, item) => acc + Number(item.price) * item.quantity,
+                                            0,
+                                        );
+
+                                        const totalUSD = (totalPrice / 23000).toFixed(2);
+                                        return actions.order.create({
+                                            purchase_units: [
+                                                {
+                                                    amount: {
+                                                        value: totalUSD,
+                                                    },
+                                                },
+                                            ],
+                                            application_context: {
+                                                shipping_preference: 'NO_SHIPPING',
+                                            },
+                                        });
+                                    }}
+                                    onApprove={async (data, actions) => {
+                                        const details = await actions.order.capture();
+                                        const name = details.payer.name.given_name + ' ' + details.payer.name.surname;
+                                        setConfirm('Đã thanh toán Paypal, chủ thẻ: ' + name);
+                                        handlePaypal();
+
+                                        // const details = await actions.order.capture();
+                                        // const name = details.payer.name.given_name;
+                                        // alert('Transaction completed by ' + name);
+                                    }}
+                                    // onApprove={(data, actions) => {
+                                    //     return actions.order.capture().then((details) => {
+                                    //         alert('Transaction completed by ' + details.payer.name.given_name);
+                                    //     });
+                                    // }}
+                                />
+                            </PayPalScriptProvider>
+                            <input id="submit" className={cx('input-btn')} type="submit" value="Xác nhận đơn hàng" />
+                        </div>
+                        <div className={cx('col-md-4')}></div>
+                    </div>
                 </form>
             </div>
         </>

@@ -5,37 +5,29 @@ import 'bootstrap/dist/css/bootstrap.css';
 import classNames from 'classnames/bind';
 import logo from '~/assets/images/logo.svg';
 import { NavLink, Link } from 'react-router-dom';
-import {
-    faCartShopping,
-    faHeart,
-    faMagnifyingGlass,
-    faSignOut,
-    faTruck,
-    faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faSignOut, faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import checkoutService from '~/services/checkoutService';
 
 const cx = classNames.bind(style);
 
 function Header() {
-    // const [cartItems, setCartItems] = useState([]);
+    // const [cartCount, setCartCount] = useState(0);
+
     // useEffect(() => {
-    //     const items = JSON.parse(localStorage.getItem('cartItems')) || [];
-    //     setCartItems(items);
-    // }, []);
-    // const totalPrice = cartItems.reduce((acc, item) => acc + Number(item.price), 0);
-
-    // const quantity = () => {
     //     const items = JSON.parse(localStorage.getItem('cartItems'));
-    //     return items.reduce((acc, item) => acc + item.quantity, 0);
-    // };
+    //     setCartCount(items.length);
+    // }, [cartCount]);
 
+    // Quantity cart
+    const [cartItems, setCartItems] = useState([]);
     const [cartCount, setCartCount] = useState(0);
+
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('cartItems'));
-        setCartCount(items.length);
-    });
-    // console.log(cartCount);
+        setCartItems(items);
+        setCartCount(items ? items.length : 0);
+    }, [cartItems]);
 
     const signOut = () => {
         localStorage.removeItem('user');
@@ -91,7 +83,7 @@ function Header() {
                                 <div className={cx('heart')}>
                                     <FontAwesomeIcon icon={faTruck} />
                                 </div>
-                                {/* <span className={cx('count')}>1</span> */}
+                                {/* <span className={cx('count')}>{orderQuantity}</span> */}
                             </div>
                         </Link>
                         <Link to="/cart" className={cx('link-cart')}>

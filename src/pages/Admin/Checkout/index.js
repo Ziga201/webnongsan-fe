@@ -19,13 +19,13 @@ function Checkout() {
 
     useEffect(() => {
         fetchCheckouts();
-    }, [checkouts]);
+    }, []);
 
     const deleteCheckout = async (id, e) => {
         var response = await checkoutService.deleteCheckout(id);
         if (response.data.success === true) {
             alert('Xoá thành công');
-            document.getElementById(id).parentElement.remove();
+            document.getElementById(id).parentElement.parentElement.remove();
         } else {
             alert(response.data.msg);
         }

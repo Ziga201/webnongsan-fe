@@ -137,29 +137,39 @@
     }
 }
 
+.product-block {
+    text-align: center;
+    padding: 20px;
+}
+
 .product-img img {
     width: 250px;
     height: 230px;
 }
-
 .product-price {
     font-size: 16px;
     color: var(--light-green);
+    font-weight: 700;
 }
 
 .product-add {
     font-weight: 600;
     border: none;
     background: none;
+    margin-top: 10px;
     &:hover {
         transition: all 0.3 ease-in;
         color: var(--dark-green);
-        transform: scale(1.1);
     }
 }
 
 .add-icon {
     margin-left: 5px;
+    transition: all ease 0.3s;
+}
+
+.product-add:hover .add-icon {
+    transform: translateX(5px);
 }
 
 .reason {

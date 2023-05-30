@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
+import '../../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 import style from '~/pages/Admin/Page.module.scss';
 // import { Link } from 'react-router-dom';
@@ -23,7 +24,6 @@ function Product() {
     useEffect(() => {
         fetchPosts();
     }, [posts]);
-
     const deletePost = async (id, e) => {
         var response = await postService.deletePost(id);
         if (response.data.success === true) {
@@ -85,7 +85,6 @@ function Product() {
                                             desc={post.desc}
                                             style={{ fontSize: '16px' }}
                                         />
-
                                         <button
                                             style={{ marginLeft: '5px', fontSize: '16px' }}
                                             id={post._id}

@@ -10,8 +10,9 @@ import brand3 from '~/assets/images/brand3.svg';
 import brand4 from '~/assets/images/brand4.svg';
 import brand5 from '~/assets/images/brand5.svg';
 import brand6 from '~/assets/images/brand6.svg';
+
 import { Link } from 'react-router-dom';
-import { faArrowRight, faCircleChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAnglesRight, faArrowRight, faCircleChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { Tab, TabList, TabPanel } from 'react-tabs';
 import { toast, ToastContainer } from 'react-toastify';
@@ -35,13 +36,20 @@ function Home() {
     // Add to cart
     const [cartItems, setCartItems] = useState([]);
 
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('cartItems'));
+        if (items) {
+            setCartItems(items);
+        }
+    }, []);
+
     function addToCart(item) {
         toast.success('Thêm vào giỏ hàng thành công !');
 
         // const newCartItems = [...cartItems, item];
         // setCartItems(newCartItems);
         // localStorage.setItem('cartItems', JSON.stringify(newCartItems));
-        const data = JSON.parse(localStorage.getItem('cartItems'));
+        // const data = JSON.parse(localStorage.getItem('cartItems'));
 
         const product = {
             id: item._id,
@@ -65,6 +73,10 @@ function Home() {
             localStorage.setItem('cartItems', JSON.stringify(newCartItems));
         }
     }
+    const handleClick = (productId) => {
+        // <Navigate to={`/product/${productId}`} />;
+        window.location.href = `/product/${productId}`;
+    };
 
     return (
         <>
@@ -79,7 +91,7 @@ function Home() {
                         </div>
                         <div className={cx('slogan')}>Cung cấp nông sản</div>
                         <div className={cx('highlight')}>Highest Quanlity</div>
-                        <Link to="/">
+                        <Link to="/product">
                             <div className={cx('btn')}>
                                 Khám phá sản phẩm
                                 <FontAwesomeIcon className={cx('icon')} icon={faArrowRight} />
@@ -144,18 +156,20 @@ function Home() {
                 </div>
                 {posts.data !== undefined && posts.data.data.length > 0 && (
                     <div className={cx('row', 'wrapper')}>
-                        {posts.data.data.map((post, index) => (
+                        {posts.data.data.slice(0, 10).map((post, index) => (
                             <div key={post._id} className={cx('product-block', 'col-md-2dot4')}>
-                                <div className={cx('product-img')}>
-                                    <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
+                                <div onClick={() => handleClick(post._id)}>
+                                    <div className={cx('product-img')}>
+                                        <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
+                                    </div>
+                                    <div className={cx('product-name')}>{post.name}</div>
                                 </div>
-                                <div className={cx('product-name')}>{post.name}</div>
                                 <div className={cx('product-price')}>
                                     {parseInt(post.price).toLocaleString('vi-VN')} VND
                                 </div>
                                 <button onClick={() => addToCart(post)} className={cx('product-add')}>
                                     Thêm giỏ hàng
-                                    <FontAwesomeIcon className={cx('add-icon')} icon={faPlus} />
+                                    <FontAwesomeIcon className={cx('add-icon')} icon={faAnglesRight} />
                                 </button>
                                 <ToastContainer position="bottom-right" />
                             </div>

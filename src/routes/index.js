@@ -6,7 +6,7 @@ import Contact from '~/pages/Client/Contact';
 import Blog from '~/pages/Client/Blog';
 import Product from '~/pages/Client/Product';
 import ProductDetail from '~/pages/Client/ProductDetail';
-import Team from '~/pages/Client/Team';
+import Staff from '~/pages/Client/Staff';
 import Cart from '~/pages/Client/Cart';
 import Login from '~/pages/Client/Login';
 import Checkout from '~/pages/Client/Checkout';
@@ -28,7 +28,7 @@ const publicRoutes = [
     { path: '/blog', component: Blog },
     { path: '/product', component: Product },
     { path: '/product/:id', component: ProductDetail },
-    { path: '/team', component: Team },
+    { path: '/staff', component: Staff },
     { path: '/cart', component: Cart },
     { path: '/login', component: Login },
     { path: '/checkout', component: Checkout },

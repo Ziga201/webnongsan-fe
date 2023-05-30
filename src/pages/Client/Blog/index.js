@@ -18,7 +18,7 @@ function Blog() {
 
     useEffect(() => {
         fetchBlogs();
-    }, [blogs]);
+    }, []);
     return (
         <>
             <div className={cx('banner')}>
