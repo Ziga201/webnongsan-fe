@@ -16,7 +16,10 @@ function UpdateComponent(props) {
     const [username, setUsername] = useState(props.username);
     const [password, setPassword] = useState(props.password);
     const [id, setId] = useState(props.id);
+    const [name, setName] = useState(props.name);
     const [email, setEmail] = useState(props.email);
+    const [selectedFile, setSelectedFile] = useState('');
+    const [decentralization, setDecentralization] = useState(props.decentralization);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,7 +28,13 @@ function UpdateComponent(props) {
         formData.append('id', id);
         formData.append('username', username);
         formData.append('password', password);
+        formData.append('name', name);
         formData.append('email', email);
+        formData.append('decentralization', decentralization);
+
+        if (selectedFile !== '' && selectedFile.length !== 0) {
+            formData.append('image', selectedFile);
+        }
 
         const response = await AccountService.update(formData);
 
@@ -66,6 +75,14 @@ function UpdateComponent(props) {
                             required
                         />
                         <input
+                            type="text"
+                            name="name"
+                            placeholder="Nhập tên"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            required
+                        />
+                        <input
                             type="email"
                             name="email"
                             placeholder="Nhập email"
@@ -73,6 +90,18 @@ function UpdateComponent(props) {
                             onChange={(event) => setEmail(event.target.value)}
                             required
                         />
+                        <input type="file" name="file" onChange={(event) => setSelectedFile(event.target.files[0])} />
+
+                        <select
+                            name="decentralization"
+                            value={decentralization}
+                            onChange={(event) => setDecentralization(event.target.value)}
+                        >
+                            <option value="Admin">Admin</option>
+                            <option value="User" selected>
+                                User
+                            </option>
+                        </select>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button type="submit" variant="dark">

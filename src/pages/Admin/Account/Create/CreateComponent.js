@@ -16,7 +16,11 @@ function CreateComponent() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [image, setImage] = useState('');
+    const [decentralization, setDecentralization] = useState('');
+
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (event) => {
@@ -26,7 +30,10 @@ function CreateComponent() {
 
         formData.append('username', username);
         formData.append('password', password);
+        formData.append('name', name);
         formData.append('email', email);
+        formData.append('image', image);
+        formData.append('decentralization', decentralization);
 
         const response = await accountService.create(formData);
         if (response.data.success === true) {
@@ -71,6 +78,14 @@ function CreateComponent() {
                             required
                         />
                         <input
+                            type="text"
+                            name="name"
+                            placeholder="Nhập tên"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            required
+                        />
+                        <input
                             type="email"
                             name="email"
                             placeholder="Nhập email"
@@ -78,6 +93,17 @@ function CreateComponent() {
                             onChange={(event) => setEmail(event.target.value)}
                             required
                         />
+                        <input type="file" name="file" onChange={(event) => setImage(event.target.files[0])} />
+                        <select
+                            name="decentralization"
+                            value={decentralization}
+                            onChange={(event) => setDecentralization(event.target.value)}
+                        >
+                            <option value="Admin">Admin</option>
+                            <option value="User" selected>
+                                User
+                            </option>
+                        </select>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button type="submit" variant="dark">

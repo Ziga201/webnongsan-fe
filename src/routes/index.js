@@ -4,11 +4,13 @@ import { AdminLayout } from '~/components/Layout';
 import Home from '~/pages/Client/Home';
 import Contact from '~/pages/Client/Contact';
 import Blog from '~/pages/Client/Blog';
+import BlogDetail from '~/pages/Client/BlogDetail';
 import Product from '~/pages/Client/Product';
 import ProductDetail from '~/pages/Client/ProductDetail';
 import Staff from '~/pages/Client/Staff';
 import Cart from '~/pages/Client/Cart';
 import Login from '~/pages/Client/Login';
+import Signup from '~/pages/Client/Signup';
 import Checkout from '~/pages/Client/Checkout';
 import Confirm from '~/pages/Client/Confirm';
 import Order from '~/pages/Client/Order';
@@ -26,11 +28,13 @@ const publicRoutes = [
     { path: '/', component: Home },
     { path: '/contact', component: Contact },
     { path: '/blog', component: Blog },
+    { path: '/blog/:id', component: BlogDetail },
     { path: '/product', component: Product },
     { path: '/product/:id', component: ProductDetail },
     { path: '/staff', component: Staff },
     { path: '/cart', component: Cart },
     { path: '/login', component: Login },
+    { path: '/signup', component: Signup },
     { path: '/checkout', component: Checkout },
     { path: '/confirm', component: Confirm },
 

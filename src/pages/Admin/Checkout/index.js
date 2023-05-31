@@ -51,6 +51,7 @@ function Checkout() {
                                 <th>Địa chỉ</th>
                                 <th>Tổng</th>
                                 <th>Ngày đặt hàng</th>
+                                <th>Tình trạng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -65,6 +66,7 @@ function Checkout() {
                                     <td>{checkout.address}</td>
                                     <td>{parseInt(checkout.total).toLocaleString('vi-VN')} VND</td>
                                     <td>{checkout.orderdate}</td>
+                                    <td>{checkout.confirm}</td>
 
                                     <td>
                                         <button

@@ -16,6 +16,11 @@ class Blog {
         return axios.get(url);
     }
 
+    getBlogById(id) {
+        const url = 'http://localhost:8000/api/get-blog/' + id;
+        return axios.get(url);
+    }
+
     deleteBlog(id) {
         const url = 'http://localhost:8000/api/delete-blog/' + id;
         return axios.get(url);

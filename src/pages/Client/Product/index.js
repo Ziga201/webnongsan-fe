@@ -118,23 +118,23 @@ function Product() {
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Tất cả</div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('ve')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Trái cây & rau củ')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Trái cây & Rau củ </div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('lan')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Thực phẩm đóng gói')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Thực phẩm đóng gói</div>
                                 </div>
                                 <div className={cx('item')} onClick={() => handleFilter('nho')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
-                                    <div className={cx('item-text')}>Lá xanh </div>
+                                    <div className={cx('item-text')}>Lá xanh</div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('nho')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Hạt giống & cây trồng')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Hạt giống và cây triết</div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('nho')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Chưa được phân loại')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Chưa được phân loại</div>
                                 </div>
@@ -147,7 +147,7 @@ function Product() {
                                         .filter((post) => {
                                             return key.toLowerCase() === ''
                                                 ? post
-                                                : post.name.toLowerCase().includes(key);
+                                                : post.category.toLowerCase().includes(key.toLowerCase());
 
                                             // search.toLowerCase() === ''
                                             //         ? post
@@ -168,6 +168,7 @@ function Product() {
                                                 <div className={cx('product-price')}>
                                                     {parseInt(post.price).toLocaleString('vi-VN')} VND
                                                 </div>
+                                                <p>{post.category.toLowerCase()}</p>
                                                 <button onClick={() => addToCart(post)} className={cx('product-add')}>
                                                     Thêm giỏ hàng
                                                     <FontAwesomeIcon className={cx('add-icon')} icon={faAnglesRight} />

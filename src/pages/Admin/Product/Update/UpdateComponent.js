@@ -18,6 +18,7 @@ function UpdateComponent(props) {
     const [id, setId] = useState(props.id);
     const [selectedFile, setSelectedFile] = useState('');
     const [desc, setDesc] = useState(props.desc);
+    const [category, setCategory] = useState(props.category);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,6 +28,7 @@ function UpdateComponent(props) {
         formData.append('name', name);
         formData.append('price', price);
         formData.append('desc', desc);
+        formData.append('category', category);
 
         if (selectedFile !== '' && selectedFile.length !== 0) {
             formData.append('image', selectedFile);
@@ -79,6 +81,14 @@ function UpdateComponent(props) {
                             onChange={(event) => setDesc(event.target.value)}
                             required
                         />
+                        <select name="category" value={category} onChange={(event) => setCategory(event.target.value)}>
+                            <option value="Trái cây & Rau củ">Trái cây & Rau củ</option>
+                            <option value="Thực phẩm đóng gói">Thực phẩm đóng gói</option>
+                            <option value="Hạt giống & cây trồng">Hạt giống & cây trồng</option>
+                            <option value="Chưa được phân loại" selected>
+                                Chưa được phân loại
+                            </option>
+                        </select>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button type="submit" variant="dark">

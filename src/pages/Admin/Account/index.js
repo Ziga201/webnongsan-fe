@@ -57,7 +57,10 @@ function Account() {
                                 <th>STT</th>
                                 <th>Tài khoản</th>
                                 <th>Mật khẩu</th>
+                                <th>Tên</th>
                                 <th>Email</th>
+                                <th>Ảnh</th>
+                                <th>Quyền</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -68,14 +71,25 @@ function Account() {
                                     <td>{account.username}</td>
                                     <td>{account.password}</td>
 
+                                    <td>{account.name}</td>
                                     <td>{account.email}</td>
+                                    <td>
+                                        <img
+                                            src={'http://localhost:8000/api/accountImages/' + account.image}
+                                            style={{ width: '50px', height: '50px' }}
+                                            alt="blog"
+                                        />
+                                    </td>
+                                    <td>{account.decentralization}</td>
 
                                     <td>
                                         <UpdateComponent
                                             id={account._id}
                                             username={account.username}
                                             password={account.password}
+                                            name={account.name}
                                             email={account.email}
+                                            decentralization={account.decentralization}
                                             style={{ fontSize: '16px' }}
                                         />
                                         <button

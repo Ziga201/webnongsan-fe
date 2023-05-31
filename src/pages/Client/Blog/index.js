@@ -19,6 +19,13 @@ function Blog() {
     useEffect(() => {
         fetchBlogs();
     }, []);
+
+    // Chuyen huong detail
+
+    const handleClick = (blogId) => {
+        // <Navigate to={`/product/${productId}`} />;
+        window.location.href = `/blog/${blogId}`;
+    };
     return (
         <>
             <div className={cx('banner')}>
@@ -39,15 +46,14 @@ function Blog() {
                     {blogs.data != undefined && blogs.data.data.length > 0 && (
                         <div className={cx('row')}>
                             {blogs.data.data.map((blog) => (
-                                <div key={blog._id} className={cx('item', 'col-md-4')}>
-                                    <Link to="/">
-                                        <div className={cx('image')}>
-                                            <img
-                                                src={'http://localhost:8000/api/blogImages/' + blog.image}
-                                                alt="blog"
-                                            />
-                                        </div>
-                                    </Link>
+                                <div
+                                    key={blog._id}
+                                    className={cx('item', 'col-md-4')}
+                                    onClick={() => handleClick(blog._id)}
+                                >
+                                    <div className={cx('image')}>
+                                        <img src={'http://localhost:8000/api/blogImages/' + blog.image} alt="blog" />
+                                    </div>
                                     <div className={cx('info')}>
                                         <FontAwesomeIcon icon={faCalendarDays} /> {blog.createAt} /{' '}
                                         <FontAwesomeIcon icon={faUser} /> bởi admin /{' '}

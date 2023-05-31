@@ -18,6 +18,7 @@ function CreateComponent() {
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
     const [desc, setDesc] = useState('');
+    const [category, setCategory] = useState('');
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (event) => {
@@ -29,6 +30,7 @@ function CreateComponent() {
         formData.append('price', price);
         formData.append('image', image);
         formData.append('desc', desc);
+        formData.append('category', category);
 
         const response = await postService.create(formData);
         if (response.data.success === true) {
@@ -110,6 +112,15 @@ function CreateComponent() {
                             onChange={(event) => setDesc(event.target.value)}
                             required
                         />
+
+                        <select name="category" value={category} onChange={(event) => setCategory(event.target.value)}>
+                            <option value="Trái cây & Rau củ">Trái cây & Rau củ</option>
+                            <option value="Thực phẩm đóng gói">Thực phẩm đóng gói</option>
+                            <option value="Hạt giống & cây trồng">Hạt giống & cây trồng</option>
+                            <option value="Chưa được phân loại" selected>
+                                Chưa được phân loại
+                            </option>
+                        </select>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button type="submit" variant="dark">

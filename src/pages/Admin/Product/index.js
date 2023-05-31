@@ -59,6 +59,7 @@ function Product() {
                                 <th>Giá</th>
                                 <th>Ảnh</th>
                                 <th>Mô tả</th>
+                                <th>Loại</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -76,6 +77,7 @@ function Product() {
                                         />
                                     </td>
                                     <td>{post.desc}</td>
+                                    <td>{post.category}</td>
 
                                     <td>
                                         <UpdateComponent
@@ -83,6 +85,7 @@ function Product() {
                                             name={post.name}
                                             price={post.price}
                                             desc={post.desc}
+                                            category={post.category}
                                             style={{ fontSize: '16px' }}
                                         />
                                         <button

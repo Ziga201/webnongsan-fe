@@ -78,6 +78,12 @@ function Home() {
         window.location.href = `/product/${productId}`;
     };
 
+    // Filter item
+    const [key, setKey] = useState('');
+    const handleFilter = (key) => {
+        setKey(key);
+    };
+
     return (
         <>
             <div className={cx('banner')}>
@@ -149,31 +155,49 @@ function Home() {
                 <div className={cx('heading')}>Sản phẩm của chúng tôi</div>
 
                 <div className={cx('tab')}>
-                    <div className={cx('tab-link', 'active')}>Tất cả</div>
-                    <div className={cx('tab-link')}>Rau củ</div>
-                    <div className={cx('tab-link')}>Trái cây</div>
-                    <div className={cx('tab-link')}>Hạt giống</div>
+                    <div className={cx('tab-link', 'active')} onClick={() => handleFilter('')}>
+                        Tất cả
+                    </div>
+                    <div className={cx('tab-link')} onClick={() => handleFilter('Trái cây & rau củ')}>
+                        Trái cây
+                    </div>
+                    <div className={cx('tab-link')} onClick={() => handleFilter('Hạt giống & cây trồng')}>
+                        Hạt giống
+                    </div>
+                    <div className={cx('tab-link')} onClick={() => handleFilter('Thực phẩm đóng gói')}>
+                        Đóng gói
+                    </div>
                 </div>
                 {posts.data !== undefined && posts.data.data.length > 0 && (
                     <div className={cx('row', 'wrapper')}>
-                        {posts.data.data.slice(0, 10).map((post, index) => (
-                            <div key={post._id} className={cx('product-block', 'col-md-2dot4')}>
-                                <div onClick={() => handleClick(post._id)}>
-                                    <div className={cx('product-img')}>
-                                        <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
+                        {posts.data.data
+                            .filter((post) => {
+                                return key.toLowerCase() === ''
+                                    ? post
+                                    : post.category.toLowerCase().includes(key.toLowerCase());
+                            })
+                            .slice(0, 10)
+                            .map((post, index) => (
+                                <div key={post._id} className={cx('product-block', 'col-md-2dot4')}>
+                                    <div onClick={() => handleClick(post._id)}>
+                                        <div className={cx('product-img')}>
+                                            <img
+                                                src={'http://localhost:8000/api/postImages/' + post.image}
+                                                alt="product"
+                                            />
+                                        </div>
+                                        <div className={cx('product-name')}>{post.name}</div>
                                     </div>
-                                    <div className={cx('product-name')}>{post.name}</div>
+                                    <div className={cx('product-price')}>
+                                        {parseInt(post.price).toLocaleString('vi-VN')} VND
+                                    </div>
+                                    <button onClick={() => addToCart(post)} className={cx('product-add')}>
+                                        Thêm giỏ hàng
+                                        <FontAwesomeIcon className={cx('add-icon')} icon={faAnglesRight} />
+                                    </button>
+                                    <ToastContainer position="bottom-right" />
                                 </div>
-                                <div className={cx('product-price')}>
-                                    {parseInt(post.price).toLocaleString('vi-VN')} VND
-                                </div>
-                                <button onClick={() => addToCart(post)} className={cx('product-add')}>
-                                    Thêm giỏ hàng
-                                    <FontAwesomeIcon className={cx('add-icon')} icon={faAnglesRight} />
-                                </button>
-                                <ToastContainer position="bottom-right" />
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 )}
             </div>

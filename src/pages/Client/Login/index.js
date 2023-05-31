@@ -30,26 +30,22 @@ function Login() {
             //     window.location.href = '/admin';
             // }
 
-            if (element.username == username && element.password == password && element.username == 'admin') {
+            if (element.username == username && element.password == password && element.decentralization == 'Admin') {
                 // alert('MK đúng');
                 localStorage.setItem('admin', true);
                 window.location.href = '/admin';
-            } else if (element.username == username && element.password == password && element.username == 'user') {
+            } else if (
+                element.username == username &&
+                element.password == password &&
+                element.decentralization == 'User'
+            ) {
                 // alert('MK đúng');
                 localStorage.setItem('user', true);
                 window.location.href = '/';
             }
         });
-
-        // const user = accounts
-        // console.log(accounts.data.data[0].username);
     };
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-
-    //     localStorage.setItem('user', true);
-    // };
     return (
         <>
             {/* <form onSubmit={handleSubmit}>
@@ -73,7 +69,7 @@ function Login() {
                     </label>
                     <input id="tab-2" type="radio" name="tab" className={cx('sign-up')} />
                     <label for="tab-2" className={cx('tab')}>
-                        Đăng ký
+                        <Link to="/signup">Đăng ký</Link>
                     </label>
                     <form onSubmit={handleSubmit} className={cx('login-form')}>
                         <div className={cx('sign-in-htm')}>
@@ -109,10 +105,10 @@ function Login() {
                                 </label>
                             </div>
                             <div className={cx('group')}>
-                                <input type="submit" className={cx('button')} value="Sign In" />
+                                <input type="submit" className={cx('button')} value="Đăng nhập" />
                             </div>
                             <div className={cx('hr')}></div>
-                            <div className={cx('foot-lnk')}>
+                            <div className={cx('foot-lnk')} style={{ textAlign: 'center' }}>
                                 <a href="#forgot">Freshio chào quý khách</a>
                             </div>
                         </div>
