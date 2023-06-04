@@ -54,13 +54,13 @@
     }
 }
 
-.active {
-    color: red !important;
-}
-
-// .menu-link.active {
-//     color: var(--light-green);
+// .active {
+//     color: red !important;
 // }
+
+.menu a.active {
+    color: var(--light-green) !important;
+}
 
 .title {
     font-weight: 700;

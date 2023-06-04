@@ -50,7 +50,7 @@ function Header() {
                         </Link>
                     </div>
                     <div className={cx('menu')}>
-                        <NavLink exact activeclassname="active" className={cx('menu-link')} to="/">
+                        <NavLink className={cx('menu-link')} to="/">
                             <div className={cx('title')}>Trang chủ</div>
                         </NavLink>
 

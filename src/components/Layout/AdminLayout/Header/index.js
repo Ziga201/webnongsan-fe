@@ -5,6 +5,7 @@ import style from './Header.module.scss';
 import avatar from './img/avatar.jpg';
 import logo from './img/logo.svg';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
@@ -15,9 +16,9 @@ function Header() {
     };
     return (
         <header className={cx('header')}>
-            <div className={cx('logo')}>
+            <Link to="/admin" className={cx('logo')}>
                 <img src={logo} />
-            </div>
+            </Link>
             <div className={cx('info')}>
                 <div className={cx('function')}>
                     <div className={cx('element')}>
