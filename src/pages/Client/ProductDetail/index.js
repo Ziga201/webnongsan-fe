@@ -31,7 +31,6 @@ function ProductDetail() {
     const fetchPosts = async () => {
         setPost((await postService.getPostById(id)).data.data);
     };
-    console.log(post);
 
     useEffect(() => {
         fetchPosts();
@@ -41,8 +40,10 @@ function ProductDetail() {
         <>
             <div className={cx('wrapper')}>
                 <div className={cx('row')}>
-                    <div className={cx('image', 'col-md-6')}>
-                        <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
+                    <div className={cx('col-md-6')}>
+                        <div className={cx('image')}>
+                            <img src={'http://localhost:8000/api/postImages/' + post.image} alt="product" />
+                        </div>
                     </div>
                     <div className={cx('info', 'col-md-6')}>
                         <div className={cx('stocking')}>Còn hàng</div>

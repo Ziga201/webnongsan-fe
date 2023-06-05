@@ -66,7 +66,7 @@ function Product() {
     }
 
     // Search item
-    // const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
     // console.log(search);
     const [key, setKey] = useState('');
     const handleFilter = (key) => {
@@ -104,7 +104,7 @@ function Product() {
                             type="text"
                             className={cx('search-input')}
                             placeholder="Nhập tên sản phẩm..."
-                            // onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                         <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
                     </div>
@@ -148,10 +148,11 @@ function Product() {
                                             return key.toLowerCase() === ''
                                                 ? post
                                                 : post.category.toLowerCase().includes(key.toLowerCase());
-
-                                            // search.toLowerCase() === ''
-                                            //         ? post
-                                            //         : post.name.toLowerCase().includes(search);
+                                        })
+                                        .filter((post) => {
+                                            return search.toLowerCase() === ''
+                                                ? post
+                                                : post.name.toLowerCase().includes(search.toLowerCase());
                                         })
                                         .map((post) => (
                                             <div key={post._id} className={cx('product-block', 'col-md-3')}>
@@ -168,7 +169,6 @@ function Product() {
                                                 <div className={cx('product-price')}>
                                                     {parseInt(post.price).toLocaleString('vi-VN')} VND
                                                 </div>
-                                                <p>{post.category.toLowerCase()}</p>
                                                 <button onClick={() => addToCart(post)} className={cx('product-add')}>
                                                     Thêm giỏ hàng
                                                     <FontAwesomeIcon className={cx('add-icon')} icon={faAnglesRight} />

@@ -79,21 +79,28 @@
 .product-block {
     text-align: center;
     padding: 20px;
-    &:hover .product-img img {
-        transform: scale(1.1);
-    }
+    // &:hover .product-img img {
+    //     transform: scale(1.1);
+    // }
 }
 
-.product-block:hover .product-name {
-    transform: scale(1.1);
-}
-.product-block:hover .product-price {
-    transform: scale(1.1);
+// .product-block:hover .product-name {
+//     transform: scale(1.1);
+// }
+// .product-block:hover .product-price {
+//     transform: scale(1.1);
+// }
+
+.product-img {
+    width: 250px;
+    height: 230px;
 }
 
 .product-img img {
-    width: 250px;
-    height: 230px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
     transition: all ease 0.3s;
 }
 

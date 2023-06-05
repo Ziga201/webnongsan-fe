@@ -54,7 +54,8 @@ function Header() {
                             <div className={cx('title')}>Trang chủ</div>
                         </NavLink>
 
-                        <NavLink activeclassname="active" className={cx('menu-link')} to="/product">
+                        {/* <NavLink activeclassname="active" className={cx('menu-link')} to="/product"> */}
+                        <NavLink activeclassname="active" className="menu-link active" to="/product">
                             <div className={cx('title')}>Sản phẩm</div>
                         </NavLink>
                         <NavLink activeclassname="active" className={cx('menu-link')} to="/staff">

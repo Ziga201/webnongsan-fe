@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import '../../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import classNames from 'classnames/bind';
 import { useState, useEffect } from 'react';
-import React from 'react';
+// import React from 'react';
 import { faCartPlus, faChartPie, faChartSimple, faCircleRight, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import style from '~/pages/Admin/Home/Home.module.scss';
@@ -15,6 +15,12 @@ import '@fontsource/source-sans-pro/400-italic.css'; // Specify weight and style
 import checkoutService from '~/services/checkoutService';
 import accountService from '~/services/accountService';
 
+import React, { Component } from 'react';
+import CanvasJSReact from '@canvasjs/react-charts';
+//var CanvasJSReact = require('@canvasjs/react-charts');
+
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const cx = classNames.bind(style);
 
 function Home() {
@@ -37,6 +43,37 @@ function Home() {
 
     const totalSales = Object.values(checkouts).reduce((acc, item) => acc + parseInt(item.total), 0);
 
+    const options = {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: 'light2', //"light1", "dark1", "dark2"
+        title: {
+            text: 'Thống kê doanh số trong 10 ngày qua',
+        },
+        axisY: {
+            includeZero: true,
+        },
+        data: [
+            {
+                type: 'area', //change type to bar, line, area, pie, etc
+                //indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: '#5A5757',
+                indexLabelPlacement: 'outside',
+                dataPoints: [
+                    { x: 1, y: 71 },
+                    { x: 2, y: 55 },
+                    { x: 3, y: 50 },
+                    { x: 4, y: 65 },
+                    { x: 5, y: 71 },
+                    { x: 6, y: 68 },
+                    { x: 7, y: 38 },
+                    { x: 8, y: 92, indexLabel: 'Cao nhất' },
+                    { x: 9, y: 54 },
+                    { x: 10, y: 60 },
+                ],
+            },
+        ],
+    };
     return (
         <>
             <div className={cx('hug')}>
@@ -115,6 +152,9 @@ function Home() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <CanvasJSChart options={options} />
                 </div>
             </div>
         </>
