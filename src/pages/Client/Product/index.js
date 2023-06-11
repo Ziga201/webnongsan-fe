@@ -24,7 +24,6 @@ function Product() {
     useEffect(() => {
         fetchPosts();
     }, []);
-    console.log(posts);
 
     // Add to cart
     const [cartItems, setCartItems] = useState([]);
@@ -122,17 +121,17 @@ function Product() {
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
                                     <div className={cx('item-text')}>Trái cây & Rau củ </div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('Thực phẩm đóng gói')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Sản phẩm đóng gói')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
-                                    <div className={cx('item-text')}>Thực phẩm đóng gói</div>
+                                    <div className={cx('item-text')}>Sản phẩm đóng gói</div>
                                 </div>
-                                <div className={cx('item')} onClick={() => handleFilter('nho')}>
+                                <div className={cx('item')} onClick={() => handleFilter('Sản phẩm chế biến')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
-                                    <div className={cx('item-text')}>Lá xanh</div>
+                                    <div className={cx('item-text')}>Sản phẩm chế biến</div>
                                 </div>
                                 <div className={cx('item')} onClick={() => handleFilter('Hạt giống & cây trồng')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />
-                                    <div className={cx('item-text')}>Hạt giống và cây triết</div>
+                                    <div className={cx('item-text')}>Hạt giống & cây trồng</div>
                                 </div>
                                 <div className={cx('item')} onClick={() => handleFilter('Chưa được phân loại')}>
                                     <FontAwesomeIcon icon={faAngleRight} className={cx('item-icon')} />

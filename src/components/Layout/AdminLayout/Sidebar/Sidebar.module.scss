@@ -11,6 +11,15 @@
     text-decoration: none;
 }
 
+.active {
+    background-color: rgb(0, 153, 255);
+}
+
+.active .desc,
+.active .logo {
+    color: #222931;
+}
+
 .element:first-child {
     margin-top: 30px;
 }

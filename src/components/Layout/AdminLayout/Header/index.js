@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCaretDown, faMagnifyingGlass, faBell, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import style from './Header.module.scss';
 import avatar from './img/avatar.jpg';
 import logo from './img/logo.svg';
@@ -23,13 +23,6 @@ function Header() {
                 <div className={cx('function')}>
                     <div className={cx('element')}>
                         <FontAwesomeIcon icon={faBars} />
-                    </div>
-                    <div className={cx('element')}>
-                        <span>Tạo mới </span>
-                        <FontAwesomeIcon icon={faCaretDown} />
-                    </div>
-                    <div className={cx('element')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </div>
                 </div>
                 <div className={cx('notify')}>

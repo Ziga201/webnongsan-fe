@@ -115,8 +115,9 @@ function CreateComponent() {
 
                         <select name="category" value={category} onChange={(event) => setCategory(event.target.value)}>
                             <option value="Trái cây & Rau củ">Trái cây & Rau củ</option>
-                            <option value="Sản phẩm phái sinh">Sản phẩm phái sinh</option>
+                            <option value="Sản phẩm đóng gói">Sản phẩm đóng gói</option>
                             <option value="Sản phẩm chế biến">Sản phẩm chế biến</option>
+                            <option value="Hạt giống & cây trồng">Hạt giống & cây trồng</option>
                             <option value="Chưa được phân loại" selected>
                                 Chưa được phân loại
                             </option>

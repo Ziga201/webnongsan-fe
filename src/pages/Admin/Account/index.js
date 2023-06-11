@@ -4,6 +4,8 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import style from '~/pages/Admin/Page.module.scss';
 // import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { useState, useEffect } from 'react';
 import accountService from '~/services/accountService';
@@ -33,6 +35,7 @@ function Account() {
             alert(response.data.msg);
         }
     };
+    const [search, setSearch] = useState('');
 
     return (
         <div className={cx('hug')}>
@@ -40,13 +43,17 @@ function Account() {
                 <div className="col">
                     <div className={cx('name_table')}>Danh mục tài khoản</div>
                 </div>
-                {/* <Link to="/create">
-                    <button className="btn btn-info" style={{ fontSize: '16px' }}>
-                        Thêm
-                    </button>
-                </Link> */}
 
                 <CreateComponent />
+            </div>
+            <div className={cx('search')}>
+                <input
+                    type="text"
+                    className={cx('search-input')}
+                    placeholder="Nhập tài khoản ..."
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
             </div>
 
             {accounts.data !== undefined && accounts.data.data.length > 0 && (
@@ -65,44 +72,50 @@ function Account() {
                             </tr>
                         </thead>
                         <tbody>
-                            {accounts.data.data.map((account, index) => (
-                                <tr>
-                                    <td>{index}</td>
-                                    <td>{account.username}</td>
-                                    <td>{account.password}</td>
+                            {accounts.data.data
+                                .filter((account) => {
+                                    return search.toLowerCase() === ''
+                                        ? account
+                                        : account.username.toLowerCase().includes(search.toLowerCase());
+                                })
+                                .map((account, index) => (
+                                    <tr>
+                                        <td>{index}</td>
+                                        <td>{account.username}</td>
+                                        <td>{account.password}</td>
 
-                                    <td>{account.name}</td>
-                                    <td>{account.email}</td>
-                                    <td>
-                                        <img
-                                            src={'http://localhost:8000/api/accountImages/' + account.image}
-                                            style={{ width: '50px', height: '50px' }}
-                                            alt="blog"
-                                        />
-                                    </td>
-                                    <td>{account.decentralization}</td>
+                                        <td>{account.name}</td>
+                                        <td>{account.email}</td>
+                                        <td>
+                                            <img
+                                                src={'http://localhost:8000/api/accountImages/' + account.image}
+                                                style={{ width: '50px', height: '50px' }}
+                                                alt="blog"
+                                            />
+                                        </td>
+                                        <td>{account.decentralization}</td>
 
-                                    <td>
-                                        <UpdateComponent
-                                            id={account._id}
-                                            username={account.username}
-                                            password={account.password}
-                                            name={account.name}
-                                            email={account.email}
-                                            decentralization={account.decentralization}
-                                            style={{ fontSize: '16px' }}
-                                        />
-                                        <button
-                                            style={{ marginLeft: '5px', fontSize: '16px' }}
-                                            id={account._id}
-                                            onClick={(e) => deleteAccount(account._id, e)}
-                                            className="btn btn-danger"
-                                        >
-                                            Xoá
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                                        <td>
+                                            <UpdateComponent
+                                                id={account._id}
+                                                username={account.username}
+                                                password={account.password}
+                                                name={account.name}
+                                                email={account.email}
+                                                decentralization={account.decentralization}
+                                                style={{ fontSize: '16px' }}
+                                            />
+                                            <button
+                                                style={{ marginLeft: '5px', fontSize: '16px' }}
+                                                id={account._id}
+                                                onClick={(e) => deleteAccount(account._id, e)}
+                                                className="btn btn-danger"
+                                            >
+                                                Xoá
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                         </tbody>
                     </table>
                 </div>

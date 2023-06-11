@@ -31,7 +31,8 @@ function UpdateComponent(props) {
         if (selectedFile !== '' && selectedFile.length !== 0) {
             formData.append('image', selectedFile);
         }
-
+        formData.append('phone', phone);
+        formData.append('position', position);
         const response = await StaffService.update(formData);
 
         if (response.data.success === true) {
@@ -39,8 +40,6 @@ function UpdateComponent(props) {
         } else {
             alert(response.data.msg);
         }
-        formData.append('phone', phone);
-        formData.append('position', position);
 
         initModal();
     };

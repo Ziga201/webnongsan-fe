@@ -1,5 +1,5 @@
 import style from './Staff.module.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
@@ -8,10 +8,19 @@ import { faAngleRight, faHandsHoldingCircle } from '@fortawesome/free-solid-svg-
 import brand7 from '~/assets/images/brand7.svg';
 import { Slide } from 'react-slideshow-image';
 import '../../../../node_modules/react-slideshow-image/dist/styles.css';
-
+import staffService from '~/services/staffService';
 const cx = classNames.bind(style);
 
 function Staff() {
+    const [staffs, setStaffs] = useState({});
+
+    const fetchStaffs = async () => {
+        setStaffs(await staffService.getStaffs());
+    };
+
+    useEffect(() => {
+        fetchStaffs();
+    }, []);
     return (
         <>
             <div className={cx('banner')}>
@@ -118,36 +127,24 @@ function Staff() {
                             <div className={cx('text-heading')}>Chúng tôi là đội tốt nhất</div>
                         </div>
                         <div className={cx('info')}>
-                            <div className={cx('row')}>
-                                <div className={cx('col-md-3 info-item')}>
-                                    <div className={cx('info-img')}>
-                                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/210902080837-ronaldo-record.jpg?q=w_1416,h_2124,x_885,y_0,c_crop" />
-                                    </div>
-                                    <div className={cx('info-name')}>Nguyễn Đức Tùng</div>
-                                    <div className={cx('info-position')}>Nhà sáng lập</div>
+                            {staffs.data !== undefined && staffs.data.data.length > 0 && (
+                                <div className={cx('row')}>
+                                    {staffs.data.data.map((staff) => (
+                                        <div className={cx('col-md-3')}>
+                                            <div className={cx('info-item')}>
+                                                <div className={cx('info-img')}>
+                                                    <img
+                                                        src={'http://localhost:8000/api/staffImages/' + staff.image}
+                                                        alt="staff"
+                                                    />
+                                                </div>
+                                                <div className={cx('info-name')}>{staff.name}</div>
+                                                <div className={cx('info-position')}>{staff.position}</div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className={cx('col-md-3 info-item ')}>
-                                    <div className={cx('info-img')}>
-                                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/210902080837-ronaldo-record.jpg?q=w_1416,h_2124,x_885,y_0,c_crop" />
-                                    </div>
-                                    <div className={cx('info-name')}>Nguyễn Đức Tùng</div>
-                                    <div className={cx('info-position')}>Nhà sáng lập</div>
-                                </div>
-                                <div className={cx('col-md-3 info-item ')}>
-                                    <div className={cx('info-img')}>
-                                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/210902080837-ronaldo-record.jpg?q=w_1416,h_2124,x_885,y_0,c_crop" />
-                                    </div>
-                                    <div className={cx('info-name')}>Nguyễn Đức Tùng</div>
-                                    <div className={cx('info-position')}>Nhà sáng lập</div>
-                                </div>
-                                <div className={cx('col-md-3 info-item ')}>
-                                    <div className={cx('info-img')}>
-                                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/210902080837-ronaldo-record.jpg?q=w_1416,h_2124,x_885,y_0,c_crop" />
-                                    </div>
-                                    <div className={cx('info-name')}>Nguyễn Đức Tùng</div>
-                                    <div className={cx('info-position')}>Nhà sáng lập</div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

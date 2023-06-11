@@ -37,6 +37,8 @@ function UpdateComponent(props) {
         if (selectedFile !== '' && selectedFile.length !== 0) {
             formData.append('image', selectedFile);
         }
+        formData.append('author', author);
+        formData.append('createAt', createAt);
 
         const response = await BlogService.update(formData);
 
@@ -45,8 +47,6 @@ function UpdateComponent(props) {
         } else {
             alert(response.data.msg);
         }
-        formData.append('author', author);
-        formData.append('createAt', createAt);
 
         initModal();
     };
@@ -70,7 +70,7 @@ function UpdateComponent(props) {
                             onChange={(event) => setTitle(event.target.value)}
                             required
                         />
-                        <input
+                        <textarea
                             type="text"
                             name="content"
                             placeholder="Nhập nội dung"

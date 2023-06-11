@@ -4,14 +4,23 @@ import { faBox, faShop, faUser, faClipboardUser, faBlog, faTruck } from '@fortaw
 import style from './Sidebar.module.scss';
 import { Routes, Route, Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 
 const cx = classNames.bind(style);
 
 function Sidebar() {
+    const [activeNav, setActiveNav] = useState('');
+
+    const handleNavClick = (nav) => {
+        setActiveNav(nav);
+    };
     return (
         <div className={cx('sidebar')}>
             <Link to="/admin/product" className={cx('element')}>
-                <div className={cx('wrap')}>
+                <div
+                    className={cx('wrap', `${activeNav === 'sp' ? 'active' : ''}`)}
+                    onClick={() => handleNavClick('sp')}
+                >
                     <div className={cx('logo')}>
                         <FontAwesomeIcon icon={faBox} />
                     </div>
@@ -19,7 +28,10 @@ function Sidebar() {
                 </div>
             </Link>
             <Link to="/admin/checkout" className={cx('element')}>
-                <div className={cx('wrap')}>
+                <div
+                    className={cx('wrap', `${activeNav === 'dh' ? 'active' : ''}`)}
+                    onClick={() => handleNavClick('dh')}
+                >
                     <div className={cx('logo')}>
                         <FontAwesomeIcon icon={faTruck} />
                     </div>
@@ -27,7 +39,10 @@ function Sidebar() {
                 </div>
             </Link>
             <Link to="/admin/account" className={cx('element')}>
-                <div className={cx('wrap')}>
+                <div
+                    className={cx('wrap', `${activeNav === 'tk' ? 'active' : ''}`)}
+                    onClick={() => handleNavClick('tk')}
+                >
                     <div className={cx('logo')}>
                         <FontAwesomeIcon icon={faUser} />
                     </div>
@@ -35,7 +50,10 @@ function Sidebar() {
                 </div>
             </Link>
             <Link to="/admin/staff" className={cx('element')}>
-                <div className={cx('wrap')}>
+                <div
+                    className={cx('wrap', `${activeNav === 'nv' ? 'active' : ''}`)}
+                    onClick={() => handleNavClick('nv')}
+                >
                     <div className={cx('logo')}>
                         <FontAwesomeIcon icon={faClipboardUser} />
                     </div>
@@ -43,7 +61,10 @@ function Sidebar() {
                 </div>
             </Link>
             <Link to="/admin/blog" className={cx('element')}>
-                <div className={cx('wrap')}>
+                <div
+                    className={cx('wrap', `${activeNav === 'bv' ? 'active' : ''}`)}
+                    onClick={() => handleNavClick('bv')}
+                >
                     <div className={cx('logo')}>
                         <FontAwesomeIcon icon={faBlog} />
                     </div>

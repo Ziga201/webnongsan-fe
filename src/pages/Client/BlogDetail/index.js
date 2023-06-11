@@ -49,7 +49,7 @@ function BlogDetail() {
                         <div className={cx('image')}>
                             <img src={'http://localhost:8000/api/blogImages/' + blog.image} alt="blog" />
                         </div>
-                        <div className={cx('content')}>{blog.content}</div>
+                        <p className={cx('content')}>{blog.content}</p>
                     </div>
                     <div className={cx('col-md-3')}>
                         <div className={cx('categories')}>

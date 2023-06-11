@@ -155,16 +155,25 @@ function Home() {
                 <div className={cx('heading')}>Sản phẩm của chúng tôi</div>
 
                 <div className={cx('tab')}>
-                    <div className={cx('tab-link', 'active')} onClick={() => handleFilter('')}>
+                    <div className={cx('tab-link', `${key === '' ? 'active' : ''}`)} onClick={() => handleFilter('')}>
                         Tất cả
                     </div>
-                    <div className={cx('tab-link')} onClick={() => handleFilter('Trái cây & rau củ')}>
+                    <div
+                        className={cx('tab-link', `${key === 'Trái cây & Rau củ' ? 'active' : ''}`)}
+                        onClick={() => handleFilter('Trái cây & Rau củ')}
+                    >
                         Trái cây
                     </div>
-                    <div className={cx('tab-link')} onClick={() => handleFilter('Hạt giống & cây trồng')}>
+                    <div
+                        className={cx('tab-link', `${key === 'Hạt giống & cây trồng' ? 'active' : ''}`)}
+                        onClick={() => handleFilter('Hạt giống & cây trồng')}
+                    >
                         Hạt giống
                     </div>
-                    <div className={cx('tab-link')} onClick={() => handleFilter('Thực phẩm đóng gói')}>
+                    <div
+                        className={cx('tab-link', `${key === 'Sản phẩm đóng gói' ? 'active' : ''}`)}
+                        onClick={() => handleFilter('Sản phẩm đóng gói')}
+                    >
                         Đóng gói
                     </div>
                 </div>

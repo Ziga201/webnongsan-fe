@@ -59,8 +59,8 @@ function Blog() {
                                         <FontAwesomeIcon icon={faUser} /> bởi admin /{' '}
                                         <FontAwesomeIcon icon={faComments} /> 6
                                     </div>
-                                    <Link to="/" className={cx('title')}>
-                                        {blog.title}
+                                    <Link to="/">
+                                        <div className={cx('title')}>{blog.title}</div>
                                     </Link>
                                     <div className={cx('desc')}>{blog.content}</div>
                                 </div>

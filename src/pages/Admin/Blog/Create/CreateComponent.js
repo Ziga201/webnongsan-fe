@@ -70,7 +70,7 @@ function CreateComponent() {
                             onChange={(event) => setTitle(event.target.value)}
                             required
                         />
-                        <input
+                        <textarea
                             type="text"
                             name="content"
                             placeholder="Nhập nội dung"

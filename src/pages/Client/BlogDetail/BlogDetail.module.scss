@@ -50,6 +50,19 @@
     margin: 10px 0;
     line-height: 1.8;
     color: #555;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.content:first-letter {
+    font-size: 60px;
+    line-height: 40px;
+    color: rgb(211, 97, 97);
+    float: left;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 5px;
+    font-family: Sansita One;
 }
 
 .categories {
