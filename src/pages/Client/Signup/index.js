@@ -52,6 +52,70 @@ function Login() {
     return (
         <>
             <div className={cx('login-wrap')}>
+                <div className={cx('login-text')}>Đăng nhập</div>
+
+                <form className={cx('form')} onSubmit={handleSubmit}>
+                    <label>Tên tài khoản</label>
+                    <input
+                        id="user"
+                        type="text"
+                        name="username"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                        required
+                        className={cx('input')}
+                    />
+                    <br />
+                    <label>Mật khẩu</label>
+
+                    <input
+                        id="pass"
+                        name="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        required
+                        className={cx('input')}
+                        data-type="password"
+                    />
+                    <br />
+                    <label>Tên khách hàng</label>
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        required
+                        className={cx('input')}
+                    />
+                    <br />
+                    <label>Email</label>
+                    <input
+                        id="pass"
+                        type="email"
+                        name="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        required
+                        className={cx('input')}
+                    />
+                    <br />
+                    <input type="file" name="file" onChange={(event) => setImage(event.target.files[0])} />
+
+                    <button className={cx('button')} type="submit">
+                        Đăng ký
+                    </button>
+                </form>
+                <p className={cx('p')}>
+                    Bạn đã có tài khoản ?{' '}
+                    <Link to="/login">
+                        <span className={cx('sign')}>Đăng nhập</span>
+                    </Link>
+                </p>
+                <ToastContainer position="bottom-right" />
+            </div>
+
+            {/* <div className={cx('login-wrap')}>
                 <div className={cx('login-html')}>
                     <input id="tab-1" type="radio" name="tab" className={cx('sign-in')} checked />
                     <label for="tab-1" className={cx('tab')}>
@@ -93,12 +157,7 @@ function Login() {
                                     data-type="password"
                                 />
                             </div>
-                            {/* <div className={cx('group')}>
-                                <label for="pass" className={cx('label')}>
-                                    Repeat Password
-                                </label>
-                                <input id="pass" type="password" className={cx('input')} data-type="password" />
-                            </div> */}
+                            
                             <div className={cx('group')}>
                                 <label for="pass" className={cx('label')}>
                                     Tên khách hàng
@@ -136,15 +195,12 @@ function Login() {
                             <div className={cx('group')}>
                                 <input type="submit" className={cx('button')} value="Đăng ký" />
                             </div>
-                            {/* <div className={cx('hr')}></div>
-                            <div className={cx('foot-lnk')}>
-                                <label for="tab-1">Already Member?</label>
-                            </div> */}
+                            
                         </div>
                     </form>
                 </div>
-                <ToastContainer position="bottom-right" />
-            </div>
+                
+            </div> */}
         </>
     );
 }

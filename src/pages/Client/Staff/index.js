@@ -107,14 +107,14 @@ function Staff() {
                             </div>
                             <div className={cx('slide-wrapper')}>
                                 <div className={cx('avatar')}>
-                                    <img src="https://static-images.vnncdn.net/files/publish/2023/4/13/ronaldo-al-nassr-1156.jpg" />
+                                    <img src="https://cdn.images.express.co.uk/img/dynamic/67/1200x712/4739506.jpg?r=1683549769896" />
                                 </div>
                                 <div className={cx('speech')}>
-                                    “Cũng thích việc tôi có thể lấy kim bấm của mình trong các gói giấy màu nâu và hộp
-                                    thủy tinh ở khu vực không rác thải, với ý tưởng giảm thiểu nhựa và cũng thuận tiện
-                                    hơn.”
+                                    “Tôi thích việc có thể lấy kim bấm của mình từ các gói giấy màu nâu và hộp thủy tinh
+                                    trong khu vực không rác thải. Điều này không chỉ giúp giảm thiểu sử dụng nhựa mà còn
+                                    tiện lợi hơn.”
                                 </div>
-                                <div className={cx('name')}>Tùng - Nhà bán hàng</div>
+                                <div className={cx('name')}>Nhô - Nhà cung cấp</div>
                             </div>
                         </Slide>
                     </div>
@@ -129,7 +129,7 @@ function Staff() {
                         <div className={cx('info')}>
                             {staffs.data !== undefined && staffs.data.data.length > 0 && (
                                 <div className={cx('row')}>
-                                    {staffs.data.data.map((staff) => (
+                                    {staffs.data.data.slice(0, 4).map((staff) => (
                                         <div className={cx('col-md-3')}>
                                             <div className={cx('info-item')}>
                                                 <div className={cx('info-img')}>

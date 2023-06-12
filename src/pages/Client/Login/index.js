@@ -40,6 +40,13 @@ function Login() {
                 element.decentralization == 'User'
             ) {
                 // alert('MK đúng');
+                const user = {
+                    id: element._id,
+                    username: element.username,
+                    decentralization: element.decentralization,
+                };
+
+                localStorage.setItem('info', JSON.stringify(user));
                 localStorage.setItem('user', true);
                 window.location.href = '/';
             }
@@ -48,105 +55,37 @@ function Login() {
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </label>
-                <br />
-                <button type="submit">Đăng nhập</button>
-            </form> */}
             <div className={cx('login-wrap')}>
-                <div className={cx('login-html')}>
-                    <input id="tab-1" type="radio" name="tab" className={cx('sign-in')} checked />
-                    <label for="tab-1" className={cx('tab')}>
+                <div className={cx('login-text')}>Đăng nhập</div>
+
+                <form className={cx('form')} onSubmit={handleSubmit}>
+                    <label>Tên tài khoản</label>
+                    <input
+                        type="text"
+                        value={username}
+                        className={cx('input')}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <br />
+                    <label>Mật khẩu</label>
+
+                    <input
+                        type="password"
+                        value={password}
+                        className={cx('input')}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <button className={cx('button')} type="submit">
                         Đăng nhập
-                    </label>
-                    <input id="tab-2" type="radio" name="tab" className={cx('sign-up')} />
-                    <label for="tab-2" className={cx('tab')}>
-                        <Link to="/signup">Đăng ký</Link>
-                    </label>
-                    <form onSubmit={handleSubmit} className={cx('login-form')}>
-                        <div className={cx('sign-in-htm')}>
-                            <div className={cx('group')}>
-                                <label for="user" className={cx('label')}>
-                                    Tên tài khoản
-                                </label>
-                                <input
-                                    id="user"
-                                    type="text"
-                                    className={cx('input')}
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
-                            </div>
-                            <div className={cx('group')}>
-                                <label for="pass" className={cx('label')}>
-                                    Mật khẩu
-                                </label>
-                                <input
-                                    id="pass"
-                                    type="password"
-                                    className={cx('input')}
-                                    data-type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <div className={cx('group')}>
-                                <input id="check" type="checkbox" className={cx('check')} checked />
-                                <label for="check">
-                                    <span className={cx('icon')}></span> Nhớ mật khẩu
-                                </label>
-                            </div>
-                            <div className={cx('group')}>
-                                <input type="submit" className={cx('button')} value="Đăng nhập" />
-                            </div>
-                            <div className={cx('hr')}></div>
-                            <div className={cx('foot-lnk')} style={{ textAlign: 'center' }}>
-                                <a href="#forgot">Freshio chào quý khách</a>
-                            </div>
-                        </div>
-                        {/* <div className={cx('foot-lnk')}>
-                            <div className={cx('group')}>
-                                <label for="user" className={cx('label')}>
-                                    Username
-                                </label>
-                                <input id="user" type="text" className={cx('input')} />
-                            </div>
-                            <div className={cx('group')}>
-                                <label for="pass" className={cx('label')}>
-                                    Password
-                                </label>
-                                <input id="pass" type="password" className={cx('input')} data-type="password" />
-                            </div>
-                            <div className={cx('group')}>
-                                <label for="pass" className={cx('label')}>
-                                    Repeat Password
-                                </label>
-                                <input id="pass" type="password" className={cx('input')} data-type="password" />
-                            </div>
-                            <div className={cx('group')}>
-                                <label for="pass" className={cx('label')}>
-                                    Email Address
-                                </label>
-                                <input id="pass" type="text" className={cx('input')} />
-                            </div>
-                            <div className={cx('group')}>
-                                <input type="submit" className={cx('button')} value="Sign Up" />
-                            </div>
-                            <div className={cx('hr')}></div>
-                            <div className={cx('foot-lnk')}>
-                                <label for="tab-1">Already Member?</label>
-                            </div>
-                        </div> */}
-                    </form>
-                </div>
+                    </button>
+                </form>
+                <p className={cx('p')}>
+                    Bạn chưa có tài khoản ?{' '}
+                    <Link to="/signup">
+                        <span className={cx('sign')}>Đăng ký</span>
+                    </Link>
+                </p>
             </div>
         </>
     );

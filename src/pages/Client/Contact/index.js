@@ -1,14 +1,49 @@
 import style from './Contact.module.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
+import messageService from '~/services/messageService';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const cx = classNames.bind(style);
 
 function Contact() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [topic, setTopic] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('topic', topic);
+        formData.append('message', message);
+
+        const response = await messageService.create(formData);
+        if (response.data.success === true) {
+            toast.success('Gửi lời nhắn thành công !');
+        } else {
+            toast.success('Gửi lời nhắn thất bại !');
+        }
+
+        // setTimeout(() => {
+        //     setMessage('');
+        // }, 2000);
+
+        event.target.reset();
+        // initModal();
+    };
+
     return (
         <>
             <div className={cx('banner')}>
@@ -68,15 +103,48 @@ function Contact() {
 
                         <div className={cx('message')}>
                             <div className={cx('title')}>Để Lại Lời Nhắn</div>
-                            <form action="">
-                                <input className={cx('message-input')} type="text" placeholder="Tên của ban"></input>
-                                <input className={cx('message-input')} type="email" placeholder="Email"></input>
-                                <input className={cx('message-input')} type="text" placeholder="Chủ đề"></input>
-                                <textarea className={cx('message-input')} type="text" placeholder="Lời nhắn"></textarea>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    className={cx('message-input')}
+                                    type="text"
+                                    name="name"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                    required
+                                    placeholder="Tên của ban"
+                                ></input>
+                                <input
+                                    className={cx('message-input')}
+                                    type="email"
+                                    name="email"
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
+                                    required
+                                    placeholder="Email"
+                                ></input>
+                                <input
+                                    className={cx('message-input')}
+                                    type="text"
+                                    name="topic"
+                                    value={topic}
+                                    onChange={(event) => setTopic(event.target.value)}
+                                    required
+                                    placeholder="Chủ đề"
+                                ></input>
+                                <textarea
+                                    className={cx('message-input')}
+                                    type="text"
+                                    name="message"
+                                    value={message}
+                                    onChange={(event) => setMessage(event.target.value)}
+                                    required
+                                    placeholder="Lời nhắn"
+                                ></textarea>
                                 <button className={cx('message-btn')} type="submit">
                                     Gửi
                                 </button>
                             </form>
+                            <ToastContainer position="bottom-right" />
                         </div>
                     </div>
                 </div>

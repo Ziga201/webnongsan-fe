@@ -48,7 +48,7 @@ function Home() {
         exportEnabled: true,
         theme: 'light2', //"light1", "dark1", "dark2"
         title: {
-            text: 'Thống kê doanh số trong 10 ngày qua',
+            // text: 'Thống kê doanh số',
         },
         axisY: {
             includeZero: true,

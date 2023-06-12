@@ -14,6 +14,7 @@ import Signup from '~/pages/Client/Signup';
 import Checkout from '~/pages/Client/Checkout';
 import Confirm from '~/pages/Client/Confirm';
 import Order from '~/pages/Client/Order';
+import Account from '~/pages/Client/Account';
 
 // Admin
 import _Home from '~/pages/Admin/Home';
@@ -22,6 +23,7 @@ import _Blog from '~/pages/Admin/Blog';
 import _Product from '~/pages/Admin/Product';
 import _Checkout from '~/pages/Admin/Checkout';
 import _Staff from '~/pages/Admin/Staff';
+import _Message from '~/pages/Admin/Message';
 
 const publicRoutes = [
     // Client
@@ -32,16 +34,19 @@ const publicRoutes = [
     { path: '/product', component: Product },
     { path: '/product/:id', component: ProductDetail },
     { path: '/staff', component: Staff },
-    { path: '/cart', component: Cart },
     { path: '/login', component: Login },
     { path: '/signup', component: Signup },
-    { path: '/checkout', component: Checkout },
-    { path: '/confirm', component: Confirm },
 
     // Admin
 ];
 
-const privateRoutes = [{ path: '/order', component: Order }];
+const privateRoutes = [
+    { path: '/order', component: Order },
+    { path: '/checkout', component: Checkout },
+    { path: '/confirm', component: Confirm },
+    { path: '/cart', component: Cart },
+    { path: '/account', component: Account },
+];
 
 const adminRoutes = [
     { path: '/admin/', component: _Home, layout: AdminLayout },
@@ -50,6 +55,7 @@ const adminRoutes = [
     { path: '/admin/staff', component: _Staff, layout: AdminLayout },
     { path: '/admin/product', component: _Product, layout: AdminLayout },
     { path: '/admin/checkout', component: _Checkout, layout: AdminLayout },
+    { path: '/admin/message', component: _Message, layout: AdminLayout },
 ];
 
 export { publicRoutes, privateRoutes, adminRoutes };

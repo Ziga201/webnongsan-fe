@@ -1,5 +1,5 @@
 .checkout {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -17,14 +17,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-.product {
-    width: 45%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: left;
 }
 
 .product img {
@@ -88,4 +80,38 @@
 }
 
 .checkout {
+}
+
+.order {
+    padding: 20px 35px;
+    border: 6px solid #ebebeb;
+    background-color: #fff;
+}
+
+.order-title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.order-product {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-product div {
+    line-height: 2;
+}
+
+.order-heading {
+    font-weight: 600;
+    color: var(--dark-green);
+    line-height: 4;
+}
+
+.order-money {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 2;
+    color: var(--light-green);
 }

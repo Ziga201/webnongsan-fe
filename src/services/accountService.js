@@ -16,6 +16,11 @@ class Account {
         return axios.get(url);
     }
 
+    getAccountById(id) {
+        const url = 'http://localhost:8000/api/get-account/' + id;
+        return axios.get(url);
+    }
+
     deleteAccount(id) {
         const url = 'http://localhost:8000/api/delete-account/' + id;
         return axios.get(url);

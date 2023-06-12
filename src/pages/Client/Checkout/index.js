@@ -80,123 +80,138 @@ function Checkout() {
     return (
         <>
             <div className={cx('checkout')}>
-                <h1 className={cx('heading')}>Đặt hàng</h1>
-                <div className={cx('products')}>
-                    {cartItems.map((item, index) => (
-                        <div className={cx('product')}>
-                            <img
-                                style={{ width: '100px' }}
-                                src={'http://localhost:8000/api/postImages/' + item.image}
-                                alt="Product"
+                <div className={cx('row')}>
+                    <div className={cx('col-md-7')}>
+                        <form onSubmit={handleSubmit} className={cx('form')}>
+                            <label for="name" className={cx('label')}>
+                                Tên khách hàng:
+                            </label>
+                            <input
+                                className={cx('input-form')}
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                                required
                             />
-                            <div className={cx('details')}>
-                                <h2 className={cx('name')}>Tên sản phẩm: {item.name}</h2>
-                                <p className={cx('p')}>Giá: {parseInt(item.price).toLocaleString('vi-VN')}</p>
-                                <p className={cx('p')}>Số lượng: {item.quantity} </p>
-                                <p className={cx('p')}>
-                                    Tổng: {(parseInt(item.price) * item.quantity).toLocaleString('vi-VN')}
-                                </p>
+                            <label for="phone">Số điện thoại:</label>
+                            <input
+                                className={cx('input-form')}
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
+                                required
+                            />
+                            <label for="address">Địa chỉ:</label>
+                            <input
+                                className={cx('input-form')}
+                                type="text"
+                                id="address"
+                                name="address"
+                                value={address}
+                                onChange={(event) => setAddress(event.target.value)}
+                                required
+                            />
+
+                            <div className={cx('row checkout')}>
+                                <div className={cx('col-md-4')}>
+                                    <p>Thanh toán ngay với Paypal</p>
+                                </div>
+                                <div className={cx('col-md-4')}>
+                                    <PayPalScriptProvider
+                                        options={{
+                                            'client-id':
+                                                'AY3o2DhF061U3MnsiFc0V9Q_RjXM-gkS8Y3VQWuGRlVzBd_7AEL7mGlM_WzNoSGxPQ3az2dBa-P1Feco',
+                                        }}
+                                    >
+                                        <PayPalButtons
+                                            type="submit"
+                                            // onClick={() => handleSubmit()}
+                                            style={{
+                                                layout: 'horizontal',
+                                            }}
+                                            createOrder={(data, actions) => {
+                                                const totalPrice = cartItems.reduce(
+                                                    (acc, item) => acc + Number(item.price) * item.quantity,
+                                                    0,
+                                                );
+
+                                                const totalUSD = (totalPrice / 23000).toFixed(2);
+                                                return actions.order.create({
+                                                    purchase_units: [
+                                                        {
+                                                            amount: {
+                                                                value: totalUSD,
+                                                            },
+                                                        },
+                                                    ],
+                                                    application_context: {
+                                                        shipping_preference: 'NO_SHIPPING',
+                                                    },
+                                                });
+                                            }}
+                                            onApprove={async (data, actions) => {
+                                                const details = await actions.order.capture();
+                                                const name =
+                                                    details.payer.name.given_name + ' ' + details.payer.name.surname;
+                                                setConfirm('Đã thanh toán Paypal, chủ thẻ: ' + name);
+                                                handlePaypal();
+
+                                                // const details = await actions.order.capture();
+                                                // const name = details.payer.name.given_name;
+                                                // alert('Transaction completed by ' + name);
+                                            }}
+                                            // onApprove={(data, actions) => {
+                                            //     return actions.order.capture().then((details) => {
+                                            //         alert('Transaction completed by ' + details.payer.name.given_name);
+                                            //     });
+                                            // }}
+                                        />
+                                    </PayPalScriptProvider>
+                                    <input
+                                        id="submit"
+                                        className={cx('input-btn')}
+                                        type="submit"
+                                        value="Thanh toán khi nhận hàng"
+                                    />
+                                </div>
+                                <div className={cx('col-md-4')}></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className={cx('col-md-5')}>
+                        <div className={cx('order')}>
+                            <div className={cx('order-info')}>
+                                <div className={cx('order-title')}>
+                                    <div className={cx('order-heading')}>Sản phẩm</div>
+                                    <div className={cx('order-heading')}>Số tiền</div>
+                                </div>
+
+                                <div style={{ 'border-bottom': '1px solid #eee' }}>
+                                    {cartItems.map((item, index) => (
+                                        <>
+                                            <div className={cx('order-product')}>
+                                                <div className={cx('')}>
+                                                    {item.name} x {item.quantity}{' '}
+                                                </div>
+                                                <div className={cx('order-heading')}>
+                                                    {parseInt(item.price).toLocaleString('vi-VN')}
+                                                </div>
+                                            </div>
+                                        </>
+                                    ))}
+                                </div>
+                                <div className={cx('order-title')}>
+                                    <div className={cx('order-heading')}>Tổng</div>
+                                    <div className={cx('order-money')}>{totalPrice.toLocaleString('vi-VN')} VND</div>
+                                </div>
                             </div>
                         </div>
-                    ))}
-                </div>
-                <div className={cx('total')}>
-                    <h4>Tổng tiền thanh toán: {totalPrice.toLocaleString('vi-VN')} VND</h4>
-                </div>
-
-                <form onSubmit={handleSubmit} className={cx('form')}>
-                    <label for="name" className={cx('label')}>
-                        Tên khách hàng:
-                    </label>
-                    <input
-                        className={cx('input-form')}
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        required
-                    />
-                    <label for="phone">Số điện thoại:</label>
-                    <input
-                        className={cx('input-form')}
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        value={phone}
-                        onChange={(event) => setPhone(event.target.value)}
-                        required
-                    />
-                    <label for="address">Địa chỉ:</label>
-                    <input
-                        className={cx('input-form')}
-                        type="text"
-                        id="address"
-                        name="address"
-                        value={address}
-                        onChange={(event) => setAddress(event.target.value)}
-                        required
-                    />
-
-                    <div className={cx('row checkout')}>
-                        <div className={cx('col-md-4')}>
-                            <p>{confirm}</p>
-                        </div>
-                        <div className={cx('col-md-4')}>
-                            <PayPalScriptProvider
-                                options={{
-                                    'client-id':
-                                        'AY3o2DhF061U3MnsiFc0V9Q_RjXM-gkS8Y3VQWuGRlVzBd_7AEL7mGlM_WzNoSGxPQ3az2dBa-P1Feco',
-                                }}
-                            >
-                                <PayPalButtons
-                                    type="submit"
-                                    // onClick={() => handleSubmit()}
-                                    style={{
-                                        layout: 'horizontal',
-                                    }}
-                                    createOrder={(data, actions) => {
-                                        const totalPrice = cartItems.reduce(
-                                            (acc, item) => acc + Number(item.price) * item.quantity,
-                                            0,
-                                        );
-
-                                        const totalUSD = (totalPrice / 23000).toFixed(2);
-                                        return actions.order.create({
-                                            purchase_units: [
-                                                {
-                                                    amount: {
-                                                        value: totalUSD,
-                                                    },
-                                                },
-                                            ],
-                                            application_context: {
-                                                shipping_preference: 'NO_SHIPPING',
-                                            },
-                                        });
-                                    }}
-                                    onApprove={async (data, actions) => {
-                                        const details = await actions.order.capture();
-                                        const name = details.payer.name.given_name + ' ' + details.payer.name.surname;
-                                        setConfirm('Đã thanh toán Paypal, chủ thẻ: ' + name);
-                                        handlePaypal();
-
-                                        // const details = await actions.order.capture();
-                                        // const name = details.payer.name.given_name;
-                                        // alert('Transaction completed by ' + name);
-                                    }}
-                                    // onApprove={(data, actions) => {
-                                    //     return actions.order.capture().then((details) => {
-                                    //         alert('Transaction completed by ' + details.payer.name.given_name);
-                                    //     });
-                                    // }}
-                                />
-                            </PayPalScriptProvider>
-                            <input id="submit" className={cx('input-btn')} type="submit" value="Xác nhận đơn hàng" />
-                        </div>
-                        <div className={cx('col-md-4')}></div>
                     </div>
-                </form>
+                </div>
             </div>
         </>
     );

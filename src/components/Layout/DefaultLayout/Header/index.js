@@ -29,11 +29,6 @@ function Header() {
         setCartCount(items ? items.length : 0);
     }, [cartItems]);
 
-    const signOut = () => {
-        localStorage.removeItem('user');
-        window.location.href = '/login';
-    };
-
     // Active navlink
     const [activeNav, setActiveNav] = useState('');
 
@@ -95,12 +90,12 @@ function Header() {
                         </NavLink>
                     </div>
                     <div className={cx('action')}>
-                        <div to="/login" onClick={() => signOut()}>
+                        <div>
                             <div className={cx('search')}>
                                 <FontAwesomeIcon icon={faSignOut} />
                             </div>
                         </div>
-                        <Link to="/login">
+                        <Link to="/account">
                             <div className={cx('user')}>
                                 <FontAwesomeIcon icon={faUser} />
                             </div>
